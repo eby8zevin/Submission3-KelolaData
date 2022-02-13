@@ -44,8 +44,8 @@ public class AppRepository implements AppDataSource {
             public LiveData<PagedList<MovieEntity>> loadFromDB() {
                 PagedList.Config config = new PagedList.Config.Builder()
                         .setEnablePlaceholders(false)
-                        .setInitialLoadSizeHint(4)
-                        .setPageSize(4)
+                        .setInitialLoadSizeHint(11)
+                        .setPageSize(11)
                         .build();
                 return new LivePagedListBuilder<>(localDataSource.getAllMovies(), config).build();
             }
