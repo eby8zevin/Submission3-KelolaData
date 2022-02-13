@@ -2,6 +2,7 @@ package com.ahmadabuhasan.keloladata.viewmodel;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -27,6 +28,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         return INSTANCE;
     }
 
+    @NonNull
     public <T extends ViewModel> T create(Class<T> modelClass) {
         if (modelClass.isAssignableFrom(MovieViewModel.class)) {
             return (T) new MovieViewModel(repository);
