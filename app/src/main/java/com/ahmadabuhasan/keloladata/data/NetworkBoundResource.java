@@ -9,8 +9,8 @@ import com.ahmadabuhasan.keloladata.vo.Resource;
 
 public abstract class NetworkBoundResource<ResultType, RequestType> {
 
-    private MediatorLiveData<Resource<ResultType>> result = new MediatorLiveData<>();
-    private AppExecutors appExecutors;
+    private final MediatorLiveData<Resource<ResultType>> result = new MediatorLiveData<>();
+    private final AppExecutors appExecutors;
 
     public NetworkBoundResource(AppExecutors mAppExecutors) {
         this.appExecutors = mAppExecutors;
