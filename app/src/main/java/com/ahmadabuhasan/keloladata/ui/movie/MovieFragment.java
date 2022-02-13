@@ -48,6 +48,7 @@ public class MovieFragment extends Fragment {
                             break;
                         case SUCCESS:
                             binding.progressBar.setVisibility(View.GONE);
+                            adapter.submitList(movies.data);
                             break;
                         case ERROR:
                             binding.progressBar.setVisibility(View.GONE);
