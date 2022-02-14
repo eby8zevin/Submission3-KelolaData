@@ -9,6 +9,7 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
+import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEmbedded;
 import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEntity;
 
 import java.util.List;
@@ -19,9 +20,12 @@ public interface AppDao {
     @Query("SELECT * FROM movieTable")
     DataSource.Factory<Integer, MovieEntity> getMovies();
 
+    @Query("SELECT * FROM movieTable where liked = 1")
+    DataSource.Factory<Integer, MovieEntity> getLikedMovies();
+
     @Transaction
     @Query("SELECT * FROM movieTable WHERE movieId = :id")
-    LiveData<MovieEntity> getMovieById(String id);
+    LiveData<MovieEmbedded> getMovieById(String id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMovies(List<MovieEntity> movies);
