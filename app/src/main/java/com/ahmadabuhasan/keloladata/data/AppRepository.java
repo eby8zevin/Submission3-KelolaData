@@ -5,6 +5,7 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.ahmadabuhasan.keloladata.data.source.local.LocalDataSource;
+import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEmbedded;
 import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEntity;
 import com.ahmadabuhasan.keloladata.data.source.remote.ApiResponse;
 import com.ahmadabuhasan.keloladata.data.source.remote.RemoteDataSource;
@@ -70,11 +71,63 @@ public class AppRepository implements AppDataSource {
                             response.getPosterPath(),
                             response.getReleaseDate(),
                             response.getTitle(),
-                            response.getVoteAverage());
+                            response.getVoteAverage(),
+                            false);
                     movieList.add(movie);
                 }
                 localDataSource.insertMovies(movieList);
             }
         }.asLiveData();
     }
+
+    @Override
+    public LiveData<Resource<MovieEmbedded>> getDetailMovie(String movieId) {
+        return new NetworkBoundResource<MovieEmbedded, List<MovieResponse>>(appExecutors) {
+            @Override
+            protected LiveData<MovieEmbedded> loadFromDB() {
+                return localDataSource.getMoviesById(movieId);
+            }
+
+            @Override
+            protected Boolean shouldFetch(MovieEmbedded embedded) {
+                return (embedded == null);
+            }
+
+            @Override
+            protected LiveData<ApiResponse<List<MovieResponse>>> createCall() {
+                return remoteDataSource.getAllMovies();
+            }
+
+            @Override
+            protected void saveCallResult(List<MovieResponse> data) {
+                ArrayList<MovieEntity> movieList = new ArrayList<>();
+                for (MovieResponse response : data) {
+                    MovieEntity movie = new MovieEntity(
+                            response.getMovieId(),
+                            response.getOverview(),
+                            response.getPosterPath(),
+                            response.getReleaseDate(),
+                            response.getTitle(),
+                            response.getVoteAverage(),
+                            false);
+                    movieList.add(movie);
+                }
+                localDataSource.insertMovies(movieList);
+            }
+        }.asLiveData();
+    }
+
+    public LiveData<PagedList<MovieEntity>> getLikedMovies() {
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setInitialLoadSizeHint(11)
+                .setPageSize(11)
+                .build();
+        return new LivePagedListBuilder<>(localDataSource.getLikedMovies(), config).build();
+    }
+
+    public void setMovieLike(MovieEntity movie, boolean state) {
+        appExecutors.diskIO().execute(() -> localDataSource.setMovieLike(movie, state));
+    }
+
 }
