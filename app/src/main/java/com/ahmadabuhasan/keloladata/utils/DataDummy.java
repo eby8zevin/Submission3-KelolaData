@@ -18,7 +18,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
                 "2021-12-15",
                 "Spider-Man: No Way Home",
-                "8.4"
+                "8.4",
+                false
         ));
         movies.add(new MovieEntity(
                 "774825",
@@ -26,7 +27,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/zzXFM4FKDG7l1ufrAkwQYv2xvnh.jpg",
                 "2022-01-28",
                 "The Ice Age Adventures of Buck Wild",
-                "7.4"
+                "7.4",
+                false
         ));
         movies.add(new MovieEntity(
                 "524434",
@@ -34,7 +36,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/bcCBq9N1EMo3daNIjWJ8kYvrQm6.jpg",
                 "2021-11-03",
                 "Eternals",
-                "7.2"
+                "7.2",
+                false
         ));
         movies.add(new MovieEntity(
                 "568124",
@@ -42,7 +45,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/4j0PNHkMr5ax3IA8tjtxcmPU3QT.jpg",
                 "2021-11-24",
                 "Encanto",
-                "7.8"
+                "7.8",
+                false
         ));
         movies.add(new MovieEntity(
                 "585083",
@@ -50,7 +54,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/teCy1egGQa0y8ULJvlrDHQKnxBL.jpg",
                 "2022-01-13",
                 "Hotel Transylvania: Transformania",
-                "7.6"
+                "7.6",
+                false
         ));
         movies.add(new MovieEntity(
                 "425909",
@@ -58,7 +63,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/sg4xJaufDiQl7caFEskBtQXfD4x.jpg",
                 "2021-11-11",
                 "Ghostbusters: Afterlife",
-                "7.7"
+                "7.7",
+                false
         ));
         movies.add(new MovieEntity(
                 "801071",
@@ -66,7 +72,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/3Ib8vlWTrAKRrTWUrTrZPOMW4jp.jpg",
                 "2022-01-03",
                 "The Jack in the Box: Awakening",
-                "5.1"
+                "5.1",
+                false
         ));
         movies.add(new MovieEntity(
                 "766907",
@@ -74,7 +81,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/daeVrgyj0ue8qb3AHyU3UeCwoZz.jpg",
                 "2022-01-07",
                 "American Siege",
-                "5.3"
+                "5.3",
+                false
         ));
         movies.add(new MovieEntity(
                 "438695",
@@ -82,7 +90,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/aWeKITRFbbwY8txG5uCj4rMCfSP.jpg",
                 "2021-12-01",
                 "Sing 2",
-                "8.2"
+                "8.2",
+                false
         ));
         movies.add(new MovieEntity(
                 "624860",
@@ -90,7 +99,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/8c4a8kE7PizaGQQnditMmI1xbRp.jpg",
                 "2021-12-16",
                 "The Matrix Resurrections",
-                "6.8"
+                "6.8",
+                false
         ));
         movies.add(new MovieEntity(
                 "460458",
@@ -98,7 +108,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/7uRbWOXxpWDMtnsd2PF3clu65jc.jpg",
                 "2021-11-24",
                 "Resident Evil: Welcome to Raccoon City",
-                "6.1"
+                "6.1",
+                false
         ));
         return movies;
     }
