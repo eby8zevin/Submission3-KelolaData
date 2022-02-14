@@ -1,6 +1,7 @@
 package com.ahmadabuhasan.keloladata.ui.movie;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEntity;
 import com.ahmadabuhasan.keloladata.databinding.ItemListBinding;
+import com.ahmadabuhasan.keloladata.ui.detail.DetailMovieActivity;
 import com.bumptech.glide.Glide;
 
 public class MovieAdapter extends PagedListAdapter<MovieEntity, MovieAdapter.MovieViewHolder> {
@@ -62,6 +64,12 @@ public class MovieAdapter extends PagedListAdapter<MovieEntity, MovieAdapter.Mov
                     .into(binding.imgPoster);
             binding.tvTitle.setText(movie.getTitle());
             binding.tvDate.setText(movie.getReleaseDate());
+
+            itemView.setOnClickListener(view -> {
+                Intent i = new Intent(itemView.getContext(), DetailMovieActivity.class);
+                i.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie.getMovieId());
+                itemView.getContext().startActivity(i);
+            });
         }
     }
 }
