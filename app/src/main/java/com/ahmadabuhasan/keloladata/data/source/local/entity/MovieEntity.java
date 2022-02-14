@@ -28,13 +28,27 @@ public class MovieEntity {
     @ColumnInfo(name = "voteAverage")
     private String voteAverage;
 
-    public MovieEntity(@NonNull String movieId, String overview, String posterPath, String releaseDate, String title, String voteAverage) {
+    @ColumnInfo(name = "liked")
+    private boolean liked = false;
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
+
+    public MovieEntity(@NonNull String movieId, String overview, String posterPath, String releaseDate, String title, String voteAverage, Boolean liked) {
         this.movieId = movieId;
         this.overview = overview;
         this.posterPath = posterPath;
         this.releaseDate = releaseDate;
         this.title = title;
         this.voteAverage = voteAverage;
+        if (liked != null) {
+            this.liked = liked;
+        }
     }
 
     @NonNull
