@@ -3,6 +3,7 @@ package com.ahmadabuhasan.keloladata.data.source.local;
 import androidx.lifecycle.LiveData;
 import androidx.paging.DataSource;
 
+import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEmbedded;
 import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEntity;
 import com.ahmadabuhasan.keloladata.data.source.local.room.AppDao;
 
@@ -28,7 +29,7 @@ public class LocalDataSource {
         return appDao.getMovies();
     }
 
-    public LiveData<MovieEntity> getMoviesById(String movieId) {
+    public LiveData<MovieEmbedded> getMoviesById(String movieId) {
         return appDao.getMovieById(movieId);
     }
 
@@ -39,4 +40,14 @@ public class LocalDataSource {
     public void updateMovies(MovieEntity movies) {
         appDao.updateMovies(movies);
     }
+
+    public DataSource.Factory<Integer, MovieEntity> getLikedMovies() {
+        return appDao.getLikedMovies();
+    }
+
+    public void setMovieLike(MovieEntity movie, boolean newState) {
+        movie.setLiked(newState);
+        appDao.updateMovies(movie);
+    }
+
 }
