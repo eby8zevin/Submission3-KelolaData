@@ -9,10 +9,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.ahmadabuhasan.keloladata.R;
 import com.ahmadabuhasan.keloladata.databinding.FragmentMovieBinding;
+import com.ahmadabuhasan.keloladata.ui.favorite.FavMovieFragment;
 import com.ahmadabuhasan.keloladata.viewmodel.ViewModelFactory;
 
 public class MovieFragment extends Fragment {
@@ -61,6 +65,14 @@ public class MovieFragment extends Fragment {
             binding.rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
             binding.rvMovie.setHasFixedSize(true);
             binding.rvMovie.setAdapter(adapter);
+
+            binding.floating.setOnClickListener(view1 -> {
+                FavMovieFragment fragment = new FavMovieFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.rv_movie, fragment);
+                fragmentTransaction.commit();
+            });
         }
     }
 
