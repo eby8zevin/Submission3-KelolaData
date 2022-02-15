@@ -1,12 +1,19 @@
 package com.ahmadabuhasan.keloladata.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ahmadabuhasan.keloladata.R;
 import com.ahmadabuhasan.keloladata.databinding.ActivityHomeBinding;
+import com.ahmadabuhasan.keloladata.ui.favorite.FavoriteActivity;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class HomeActivity extends AppCompatActivity {
@@ -34,5 +41,21 @@ public class HomeActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setElevation(0);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_detail, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_like) {
+            startActivity(new Intent(this, FavoriteActivity.class));
+            Toast.makeText(getApplicationContext(), "Favorite", Toast.LENGTH_SHORT).show();
+        }
+        return true;
     }
 }
