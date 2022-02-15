@@ -4,10 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android Studio/KelolaData/app/src/main/res/layout/activity_detail_movie.xml" value="0.1" />
+        <entry key="..\:/Android Studio/KelolaData/app/src/main/res/layout/activity_favorite.xml" value="0.1" />
         <entry key="..\:/Android Studio/KelolaData/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/Android Studio/KelolaData/app/src/main/res/layout/activity_main.xml" value="0.10461956521739131" />
         <entry key="..\:/Android Studio/KelolaData/app/src/main/res/layout/content_detail.xml" value="0.18" />
         <entry key="..\:/Android Studio/KelolaData/app/src/main/res/layout/fragment_fav_movie.xml" value="0.1" />
+        <entry key="..\:/Android Studio/KelolaData/app/src/main/res/layout/fragment_favorite_movie.xml" value="0.1" />
+        <entry key="..\:/Android Studio/KelolaData/app/src/main/res/layout/fragment_favorite_tvshow.xml" value="0.1" />
         <entry key="..\:/Android Studio/KelolaData/app/src/main/res/layout/fragment_movie.xml" value="0.1" />
         <entry key="..\:/Android Studio/KelolaData/app/src/main/res/layout/item_detail_movie.xml" value="0.1" />
         <entry key="..\:/Android Studio/KelolaData/app/src/main/res/layout/item_favorite.xml" value="0.1" />
