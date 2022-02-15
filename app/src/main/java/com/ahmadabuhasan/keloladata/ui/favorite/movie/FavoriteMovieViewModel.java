@@ -1,4 +1,4 @@
-package com.ahmadabuhasan.keloladata.ui.favorite;
+package com.ahmadabuhasan.keloladata.ui.favorite.movie;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -7,11 +7,11 @@ import androidx.paging.PagedList;
 import com.ahmadabuhasan.keloladata.data.AppRepository;
 import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEntity;
 
-public class FavMovieViewModel extends ViewModel {
+public class FavoriteMovieViewModel extends ViewModel {
 
     private AppRepository repository;
 
-    public FavMovieViewModel(AppRepository mRepository) {
+    public FavoriteMovieViewModel(AppRepository mRepository) {
         this.repository = mRepository;
     }
 
