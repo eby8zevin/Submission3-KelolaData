@@ -12,4 +12,8 @@ public interface AppDataSource {
     LiveData<Resource<PagedList<MovieEntity>>> getAllMovies();
 
     LiveData<Resource<MovieEmbedded>> getDetailMovie(String movieId);
+
+    LiveData<PagedList<MovieEntity>> getLikedMovies();
+
+    void setMovieLike(MovieEntity movie, boolean state);
 }
