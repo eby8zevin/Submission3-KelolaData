@@ -33,21 +33,16 @@ public class LocalDataSource {
         return appDao.getMovieById(movieId);
     }
 
-    public void insertMovies(List<MovieEntity> movies) {
-        appDao.insertMovies(movies);
-    }
-
-    public void updateMovies(MovieEntity movies) {
-        appDao.updateMovies(movies);
-    }
-
     public DataSource.Factory<Integer, MovieEntity> getLikedMovies() {
-        return appDao.getLikedMovies();
+        return appDao.getLikedMovie();
     }
 
     public void setMovieLike(MovieEntity movie, boolean newState) {
         movie.setLiked(newState);
-        appDao.updateMovies(movie);
+        appDao.updateMovie(movie);
     }
 
+    public void insertMovies(List<MovieEntity> movies) {
+        appDao.insertMovies(movies);
+    }
 }
