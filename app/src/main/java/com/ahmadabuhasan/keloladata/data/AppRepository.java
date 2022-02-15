@@ -1,5 +1,6 @@
 package com.ahmadabuhasan.keloladata.data;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
@@ -24,7 +25,7 @@ public class AppRepository implements AppDataSource {
     private final LocalDataSource localDataSource;
     private final AppExecutors appExecutors;
 
-    private AppRepository(RemoteDataSource remoteDataSource1, LocalDataSource localDataSource1, AppExecutors appExecutors1) {
+    private AppRepository(@NonNull RemoteDataSource remoteDataSource1, @NonNull LocalDataSource localDataSource1, AppExecutors appExecutors1) {
         this.remoteDataSource = remoteDataSource1;
         this.localDataSource = localDataSource1;
         this.appExecutors = appExecutors1;
@@ -45,8 +46,8 @@ public class AppRepository implements AppDataSource {
             public LiveData<PagedList<MovieEntity>> loadFromDB() {
                 PagedList.Config config = new PagedList.Config.Builder()
                         .setEnablePlaceholders(false)
-                        .setInitialLoadSizeHint(11)
-                        .setPageSize(11)
+                        .setInitialLoadSizeHint(3)
+                        .setPageSize(3)
                         .build();
                 return new LivePagedListBuilder<>(localDataSource.getAllMovies(), config).build();
             }
@@ -117,17 +118,18 @@ public class AppRepository implements AppDataSource {
         }.asLiveData();
     }
 
+    @Override
     public LiveData<PagedList<MovieEntity>> getLikedMovies() {
         PagedList.Config config = new PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
-                .setInitialLoadSizeHint(11)
-                .setPageSize(11)
+                .setInitialLoadSizeHint(3)
+                .setPageSize(3)
                 .build();
         return new LivePagedListBuilder<>(localDataSource.getLikedMovies(), config).build();
     }
 
+    @Override
     public void setMovieLike(MovieEntity movie, boolean state) {
         appExecutors.diskIO().execute(() -> localDataSource.setMovieLike(movie, state));
     }
-
 }
