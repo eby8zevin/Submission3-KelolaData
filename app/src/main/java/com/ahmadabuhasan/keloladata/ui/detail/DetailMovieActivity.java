@@ -112,13 +112,20 @@ public class DetailMovieActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
-        }else if (item.getItemId() == R.id.action_like) {
+        } else if (item.getItemId() == R.id.action_like) {
             viewModel.setLike();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
+        contentDetailBinding = null;
     }
 
     private void setLikeState(boolean state) {
@@ -129,12 +136,5 @@ public class DetailMovieActivity extends AppCompatActivity {
         } else {
             menuItem.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border));
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        binding = null;
-        contentDetailBinding = null;
     }
 }
