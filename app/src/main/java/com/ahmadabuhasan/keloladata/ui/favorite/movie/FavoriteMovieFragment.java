@@ -1,4 +1,4 @@
-package com.ahmadabuhasan.keloladata.ui.favorite;
+package com.ahmadabuhasan.keloladata.ui.favorite.movie;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,16 +11,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.ahmadabuhasan.keloladata.databinding.FragmentFavMovieBinding;
+import com.ahmadabuhasan.keloladata.databinding.FragmentFavoriteMovieBinding;
 import com.ahmadabuhasan.keloladata.viewmodel.ViewModelFactory;
 
-public class FavMovieFragment extends Fragment {
+public class FavoriteMovieFragment extends Fragment {
 
-    private FragmentFavMovieBinding binding;
-    private FavMovieAdapter adapter;
-    private FavMovieViewModel viewModel;
+    private FragmentFavoriteMovieBinding binding;
+    private FavoriteMovieAdapter adapter;
+    private FavoriteMovieViewModel viewModel;
 
-    public FavMovieFragment() {
+    public FavoriteMovieFragment() {
         // Required empty public constructor
     }
 
@@ -28,7 +28,7 @@ public class FavMovieFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentFavMovieBinding.inflate(inflater);
+        binding = FragmentFavoriteMovieBinding.inflate(inflater);
         return binding.getRoot();
     }
 
@@ -38,18 +38,18 @@ public class FavMovieFragment extends Fragment {
 
         if (getActivity() != null) {
             ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
-            viewModel = new ViewModelProvider(this, factory).get(FavMovieViewModel.class);
+            viewModel = new ViewModelProvider(this, factory).get(FavoriteMovieViewModel.class);
 
-            adapter = new FavMovieAdapter();
+            adapter = new FavoriteMovieAdapter();
             binding.progressBar.setVisibility(View.VISIBLE);
             viewModel.getLikes().observe(this, courses -> {
                 binding.progressBar.setVisibility(View.GONE);
                 adapter.submitList(courses);
             });
 
-            binding.rvFavMovie.setLayoutManager(new LinearLayoutManager(getContext()));
-            binding.rvFavMovie.setHasFixedSize(true);
-            binding.rvFavMovie.setAdapter(adapter);
+            binding.rvFavoriteMovie.setLayoutManager(new LinearLayoutManager(getContext()));
+            binding.rvFavoriteMovie.setHasFixedSize(true);
+            binding.rvFavoriteMovie.setAdapter(adapter);
         }
     }
 
