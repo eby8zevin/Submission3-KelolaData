@@ -20,8 +20,8 @@ public interface AppDao {
     @Query("SELECT * FROM movieTable")
     DataSource.Factory<Integer, MovieEntity> getMovies();
 
-    @Query("SELECT * FROM movieTable where liked = 1")
-    DataSource.Factory<Integer, MovieEntity> getLikedMovies();
+    @Query("SELECT * FROM movieTable WHERE liked = 1")
+    DataSource.Factory<Integer, MovieEntity> getLikedMovie();
 
     @Transaction
     @Query("SELECT * FROM movieTable WHERE movieId = :id")
@@ -31,5 +31,5 @@ public interface AppDao {
     void insertMovies(List<MovieEntity> movies);
 
     @Update
-    void updateMovies(MovieEntity movies);
+    void updateMovie(MovieEntity movies);
 }
