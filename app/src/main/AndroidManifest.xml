@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KelolaData">
         <activity android:name=".ui.favorite.FavoriteActivity" />
+        <activity android:name=".ui.detail.DetailTVShowActivity" />
         <activity android:name=".ui.detail.DetailMovieActivity" />
         <activity
             android:name=".ui.home.HomeActivity"
