@@ -72,7 +72,7 @@ public class MovieAdapter extends PagedListAdapter<MovieEntity, MovieAdapter.Mov
             itemView.setOnClickListener(view -> {
                 Intent i = new Intent(itemView.getContext(), DetailMovieActivity.class);
                 i.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie.getMovieId());
-                Toast.makeText(itemView.getContext(), "You Choose " + movie.getTitle(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(itemView.getContext(), "You Choose: " + movie.getTitle(), Toast.LENGTH_SHORT).show();
                 itemView.getContext().startActivity(i);
             });
         }
