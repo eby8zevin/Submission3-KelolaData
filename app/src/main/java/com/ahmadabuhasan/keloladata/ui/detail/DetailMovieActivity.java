@@ -16,6 +16,7 @@ import com.ahmadabuhasan.keloladata.databinding.ActivityDetailMovieBinding;
 import com.ahmadabuhasan.keloladata.databinding.ContentDetailBinding;
 import com.ahmadabuhasan.keloladata.viewmodel.ViewModelFactory;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.Objects;
 
@@ -79,6 +80,7 @@ public class DetailMovieActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(movie.getPosterPath())
+                .apply(RequestOptions.placeholderOf(R.drawable.ic_loading).error(R.drawable.ic_error))
                 .into(contentDetailBinding.ivPoster);
     }
 
