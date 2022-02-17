@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
@@ -71,6 +72,7 @@ public class FavoriteMovieAdapter extends PagedListAdapter<MovieEntity, Favorite
             itemView.setOnClickListener(view -> {
                 Intent i = new Intent(itemView.getContext(), DetailMovieActivity.class);
                 i.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie.getMovieId());
+                Toast.makeText(itemView.getContext(), "You Choose " + movie.getTitle(), Toast.LENGTH_SHORT).show();
                 itemView.getContext().startActivity(i);
             });
         }
