@@ -73,6 +73,10 @@ public class HomeActivity extends AppCompatActivity {
                 .setTitle("Really Exit?")
                 .setMessage("Are you sure you want to exit?")
                 .setNegativeButton(android.R.string.no, null)
-                .setPositiveButton(android.R.string.yes, (arg0, arg1) -> HomeActivity.super.onBackPressed()).create().show();
+                .setPositiveButton(android.R.string.yes, (dialogInterface, i) -> {
+                    HomeActivity.super.onBackPressed();
+                    finishAndRemoveTask();
+                }).create().show();
+
     }
 }
