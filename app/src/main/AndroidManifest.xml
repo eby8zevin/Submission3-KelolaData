@@ -15,8 +15,9 @@
         <activity android:name=".ui.favorite.FavoriteActivity" />
         <activity android:name=".ui.detail.DetailTVShowActivity" />
         <activity android:name=".ui.detail.DetailMovieActivity" />
+        <activity android:name=".ui.home.HomeActivity" />
         <activity
-            android:name=".ui.home.HomeActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
