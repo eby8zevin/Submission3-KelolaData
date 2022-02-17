@@ -64,6 +64,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         binding = null;
+        this.finish();
     }
 
     @Override
