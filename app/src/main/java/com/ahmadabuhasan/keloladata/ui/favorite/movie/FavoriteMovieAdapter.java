@@ -1,6 +1,7 @@
 package com.ahmadabuhasan.keloladata.ui.favorite.movie;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -9,9 +10,12 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ahmadabuhasan.keloladata.R;
 import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEntity;
 import com.ahmadabuhasan.keloladata.databinding.ItemListBinding;
+import com.ahmadabuhasan.keloladata.ui.detail.DetailMovieActivity;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 public class FavoriteMovieAdapter extends PagedListAdapter<MovieEntity, FavoriteMovieAdapter.FavoriteViewHolder> {
 
@@ -59,9 +63,16 @@ public class FavoriteMovieAdapter extends PagedListAdapter<MovieEntity, Favorite
         void bind(MovieEntity movie) {
             Glide.with(itemView.getContext())
                     .load(movie.getPosterPath())
+                    .apply(RequestOptions.placeholderOf(R.drawable.ic_loading).error(R.drawable.ic_error))
                     .into(binding.imgPoster);
             binding.tvTitle.setText(movie.getTitle());
             binding.tvDate.setText(movie.getReleaseDate());
+
+            itemView.setOnClickListener(view -> {
+                Intent i = new Intent(itemView.getContext(), DetailMovieActivity.class);
+                i.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie.getMovieId());
+                itemView.getContext().startActivity(i);
+            });
         }
     }
 }
