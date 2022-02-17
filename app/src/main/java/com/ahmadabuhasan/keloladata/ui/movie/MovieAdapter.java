@@ -10,10 +10,12 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ahmadabuhasan.keloladata.R;
 import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEntity;
 import com.ahmadabuhasan.keloladata.databinding.ItemListBinding;
 import com.ahmadabuhasan.keloladata.ui.detail.DetailMovieActivity;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 public class MovieAdapter extends PagedListAdapter<MovieEntity, MovieAdapter.MovieViewHolder> {
 
@@ -61,6 +63,7 @@ public class MovieAdapter extends PagedListAdapter<MovieEntity, MovieAdapter.Mov
         void bind(MovieEntity movie) {
             Glide.with(itemView.getContext())
                     .load(movie.getPosterPath())
+                    .apply(RequestOptions.placeholderOf(R.drawable.ic_loading).error(R.drawable.ic_error))
                     .into(binding.imgPoster);
             binding.tvTitle.setText(movie.getTitle());
             binding.tvDate.setText(movie.getReleaseDate());
