@@ -77,4 +77,8 @@ public class FavoriteMovieAdapter extends PagedListAdapter<MovieEntity, Favorite
             });
         }
     }
+
+    public MovieEntity getSwipedData(int swipedPosition) {
+        return getItem(swipedPosition);
+    }
 }
