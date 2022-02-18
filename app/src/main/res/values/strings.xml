@@ -10,6 +10,9 @@
     <string name="overview">Overview</string>
     <string name="detail">Detail</string>
 
+    <string name="message_undo">Undelete previous item?</string>
+    <string name="message_ok">OK</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_favorite">Favorite</string>
