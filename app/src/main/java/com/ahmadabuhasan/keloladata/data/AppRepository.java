@@ -8,9 +8,11 @@ import androidx.paging.PagedList;
 import com.ahmadabuhasan.keloladata.data.source.local.LocalDataSource;
 import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEmbedded;
 import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEntity;
+import com.ahmadabuhasan.keloladata.data.source.local.entity.TVShowEntity;
 import com.ahmadabuhasan.keloladata.data.source.remote.ApiResponse;
 import com.ahmadabuhasan.keloladata.data.source.remote.RemoteDataSource;
 import com.ahmadabuhasan.keloladata.data.source.remote.response.MovieResponse;
+import com.ahmadabuhasan.keloladata.data.source.remote.response.TVShowResponse;
 import com.ahmadabuhasan.keloladata.utils.AppExecutors;
 import com.ahmadabuhasan.keloladata.vo.Resource;
 
@@ -131,5 +133,46 @@ public class AppRepository implements AppDataSource {
     @Override
     public void setMovieLike(MovieEntity movie, boolean state) {
         appExecutors.diskIO().execute(() -> localDataSource.setMovieLike(movie, state));
+    }
+
+    @Override
+    public LiveData<Resource<PagedList<TVShowEntity>>> getAllTVShows() {
+        return new NetworkBoundResource<PagedList<TVShowEntity>, List<TVShowResponse>>(appExecutors) {
+            public LiveData<PagedList<TVShowEntity>> loadFromDB() {
+                PagedList.Config config = new PagedList.Config.Builder()
+                        .setEnablePlaceholders(false)
+                        .setInitialLoadSizeHint(3)
+                        .setPageSize(3)
+                        .build();
+                return new LivePagedListBuilder<>(localDataSource.getAllTVShows(), config).build();
+            }
+
+            @Override
+            public Boolean shouldFetch(PagedList<TVShowEntity> data) {
+                return (data == null) || (data.size() == 0);
+            }
+
+            @Override
+            public LiveData<ApiResponse<List<TVShowResponse>>> createCall() {
+                return remoteDataSource.getAllTVShows();
+            }
+
+            @Override
+            public void saveCallResult(List<TVShowResponse> tvShowResponses) {
+                ArrayList<TVShowEntity> tvShowList = new ArrayList<>();
+                for (TVShowResponse response : tvShowResponses) {
+                    TVShowEntity tvShow = new TVShowEntity(
+                            response.getTvShowId(),
+                            response.getOverview(),
+                            response.getPosterPath(),
+                            response.getFirstAirDate(),
+                            response.getTitle(),
+                            response.getVoteAverage(),
+                            false);
+                    tvShowList.add(tvShow);
+                }
+                localDataSource.insertTVShows(tvShowList);
+            }
+        }.asLiveData();
     }
 }
