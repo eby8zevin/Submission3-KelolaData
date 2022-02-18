@@ -123,7 +123,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/EpDuYIK81YtCUT3gH2JDpyj8Qk.jpg",
                 "2021-01-08",
                 "Marvel Studios: Legends",
-                "7.5"
+                "7.5",
+                false
         ));
         tvShows.add(new TVShowEntity(
                 "90",
@@ -131,7 +132,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/dTTl7DR23zr8IlPSMh2Vcfumyo3.jpg",
                 "2003-09-03",
                 "Mayday",
-                "8.2"
+                "8.2",
+                false
         ));
         tvShows.add(new TVShowEntity(
                 "45",
@@ -139,7 +141,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/aqM6QnuhSXzjHlKbXyKUqxaGiWu.jpg",
                 "2002-10-20",
                 "Top Gear",
-                "7.4"
+                "7.4",
+                false
         ));
         tvShows.add(new TVShowEntity(
                 "3562",
@@ -147,7 +150,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/giUBXYnDAaJgNqA6iE3BMVE2EHp.jpg",
                 "1974-03-03",
                 "NOVA",
-                "7.1"
+                "7.1",
+                false
         ));
         tvShows.add(new TVShowEntity(
                 "87083",
@@ -155,7 +159,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/hZZpqv9bKo9tUMmQY54HIJcgyqx.jpg",
                 "2019-03-08",
                 "Formula 1: Drive to Survive",
-                "8.3"
+                "8.3",
+                false
         ));
         tvShows.add(new TVShowEntity(
                 "137003",
@@ -163,7 +168,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/628U5ybT3fV0gGbT41Lk3R15Ya0.jpg",
                 "2021-11-04",
                 "Catching Killers",
-                "6.4"
+                "6.4",
+                false
         ));
         tvShows.add(new TVShowEntity(
                 "32608",
@@ -171,7 +177,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/8yR1FK6z1Gx0pyvyXRJrvbxOyuU.jpg",
                 "2010-04-20",
                 "Ancient Aliens",
-                "6.9"
+                "6.9",
+                false
         ));
         tvShows.add(new TVShowEntity(
                 "118924",
@@ -179,7 +186,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/v2BHRwtQVkt5fssLdo5MpFgHJPY.jpg",
                 "2021-03-12",
                 "Marvel Studios: Assembled",
-                "7.4"
+                "7.4",
+                false
         ));
         tvShows.add(new TVShowEntity(
                 "1181",
@@ -187,7 +195,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/g0CcpIzTA3nWETpLiatdnTcU2Qn.jpg",
                 "1988-10-04",
                 "American Experience",
-                "8.4"
+                "8.4",
+                false
         ));
         tvShows.add(new TVShowEntity(
                 "10472",
@@ -195,7 +204,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/qBVRuTUki4okdGOO5TJJZb99Q6X.jpg",
                 "1975-01-01",
                 "Austin City Limits",
-                "6.1"
+                "6.1",
+                false
         ));
         tvShows.add(new TVShowEntity(
                 "224",
@@ -203,7 +213,8 @@ public class DataDummy {
                 "https://image.tmdb.org/t/p/w500/paRFRd11WlFOxVbGnzjjCBym7FW.jpg",
                 "1964-08-22",
                 "Match of the Day",
-                "7.7"
+                "7.7",
+                false
         ));
         return tvShows;
     }
