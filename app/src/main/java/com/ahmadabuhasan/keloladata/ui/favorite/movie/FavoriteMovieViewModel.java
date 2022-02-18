@@ -9,7 +9,7 @@ import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEntity;
 
 public class FavoriteMovieViewModel extends ViewModel {
 
-    private AppRepository repository;
+    private final AppRepository repository;
 
     public FavoriteMovieViewModel(AppRepository mRepository) {
         this.repository = mRepository;
