@@ -28,13 +28,27 @@ public class TVShowEntity {
     @ColumnInfo(name = "voteAverage")
     private String voteAverage;
 
-    public TVShowEntity(@NonNull String tvShowId, String overview, String posterPath, String firstAirDate, String title, String voteAverage) {
+    @ColumnInfo(name = "liked")
+    private boolean liked = false;
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
+
+    public TVShowEntity(@NonNull String tvShowId, String overview, String posterPath, String firstAirDate, String title, String voteAverage, Boolean liked) {
         this.tvShowId = tvShowId;
         this.overview = overview;
         this.posterPath = posterPath;
         this.firstAirDate = firstAirDate;
         this.title = title;
         this.voteAverage = voteAverage;
+        if (liked != null) {
+            this.liked = liked;
+        }
     }
 
     @NonNull
