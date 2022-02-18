@@ -12,7 +12,7 @@ import com.ahmadabuhasan.keloladata.vo.Resource;
 
 public class DetailMovieViewModel extends ViewModel {
 
-    private MutableLiveData<String> movieId = new MutableLiveData<>();
+    private final MutableLiveData<String> movieId = new MutableLiveData<>();
     private AppRepository repository;
 
     public DetailMovieViewModel(AppRepository mRepository) {
