@@ -8,6 +8,8 @@ import com.ahmadabuhasan.keloladata.R;
 
 public class DetailTVShowActivity extends AppCompatActivity {
 
+    public static final String EXTRA_TVSHOW = "extra_tvshow";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
