@@ -9,10 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.ahmadabuhasan.keloladata.R;
+import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEntity;
 import com.ahmadabuhasan.keloladata.databinding.FragmentFavoriteMovieBinding;
 import com.ahmadabuhasan.keloladata.viewmodel.ViewModelFactory;
+import com.google.android.material.snackbar.Snackbar;
 
 public class FavoriteMovieFragment extends Fragment {
 
@@ -36,6 +41,8 @@ public class FavoriteMovieFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        itemTouchHelper.attachToRecyclerView(binding.rvFavoriteMovie);
+
         if (getActivity() != null) {
             ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
             viewModel = new ViewModelProvider(this, factory).get(FavoriteMovieViewModel.class);
@@ -58,4 +65,28 @@ public class FavoriteMovieFragment extends Fragment {
         super.onDestroy();
         binding = null;
     }
+
+    private final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
+        @Override
+        public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+            return makeMovementFlags(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+        }
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return true;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            if (getView() != null) {
+                int swipedPosition = viewHolder.getAdapterPosition();
+                MovieEntity movieEntity = adapter.getSwipedData(swipedPosition);
+                viewModel.setLike(movieEntity);
+                Snackbar snackbar = Snackbar.make(getView(), R.string.message_undo, Snackbar.LENGTH_LONG);
+                snackbar.setAction(R.string.message_ok, v -> viewModel.setLike(movieEntity));
+                snackbar.show();
+            }
+        }
+    });
 }
