@@ -23,9 +23,9 @@ public interface AppDataSource {
     // TV Show
     LiveData<Resource<PagedList<TVShowEntity>>> getAllTVShows();
 
-    //LiveData<Resource<TVShowEmbedded>> getDetailTVShow(String tvShowId);
+    LiveData<Resource<TVShowEmbedded>> getDetailTVShow(String tvShowId);
 
-    //LiveData<PagedList<TVShowEntity>> getLikedTVShows();
+    LiveData<PagedList<TVShowEntity>> getLikedTVShows();
 
-    //void setTVShowLike(TVShowEntity tvShow, boolean state);
+    void setTVShowLike(TVShowEntity tvShow, boolean state);
 }
