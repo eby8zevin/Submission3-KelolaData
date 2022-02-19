@@ -1,66 +1,92 @@
 package com.ahmadabuhasan.keloladata.ui.favorite.tvshow;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ahmadabuhasan.keloladata.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FavoriteTVShowFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.ahmadabuhasan.keloladata.R;
+import com.ahmadabuhasan.keloladata.data.source.local.entity.TVShowEntity;
+import com.ahmadabuhasan.keloladata.databinding.FragmentFavoriteTvshowBinding;
+import com.ahmadabuhasan.keloladata.viewmodel.ViewModelFactory;
+import com.google.android.material.snackbar.Snackbar;
+
 public class FavoriteTVShowFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private FragmentFavoriteTvshowBinding binding;
+    private FavoriteTVShowAdapter adapter;
+    private FavoriteTVShowViewModel viewModel;
 
     public FavoriteTVShowFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FavoriteTVShowFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FavoriteTVShowFragment newInstance(String param1, String param2) {
-        FavoriteTVShowFragment fragment = new FavoriteTVShowFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        binding = FragmentFavoriteTvshowBinding.inflate(inflater);
+        return binding.getRoot();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        itemTouchHelper.attachToRecyclerView(binding.rvFavoriteTvShow);
+
+        if (getActivity() != null) {
+            ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
+            viewModel = new ViewModelProvider(this, factory).get(FavoriteTVShowViewModel.class);
+
+            adapter = new FavoriteTVShowAdapter();
+            binding.progressBar.setVisibility(View.VISIBLE);
+            viewModel.getLikes().observe(this, tvShows -> {
+                binding.progressBar.setVisibility(View.GONE);
+                adapter.submitList(tvShows);
+            });
+
+            binding.rvFavoriteTvShow.setLayoutManager(new LinearLayoutManager(getContext()));
+            binding.rvFavoriteTvShow.setHasFixedSize(true);
+            binding.rvFavoriteTvShow.setAdapter(adapter);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite_tvshow, container, false);
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
+
+    private final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
+        @Override
+        public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+            return makeMovementFlags(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+        }
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return true;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            if (getView() != null) {
+                int swipedPosition = viewHolder.getAdapterPosition();
+                TVShowEntity tvShowEntity = adapter.getSwipedData(swipedPosition);
+                viewModel.setLike(tvShowEntity);
+                Snackbar snackbar = Snackbar.make(getView(), R.string.message_undo, Snackbar.LENGTH_LONG);
+                snackbar.setAction(R.string.message_ok, v -> viewModel.setLike(tvShowEntity));
+                snackbar.show();
+            }
+        }
+    });
 }
