@@ -48,17 +48,17 @@ public class DetailMovieActivity extends AppCompatActivity {
             if (movieId != null) {
                 viewModel.setMovieId(movieId);
 
-                viewModel.movieEmbedded.observe(this, movieEntityResource -> {
-                    if (movieEntityResource != null) {
-                        switch (movieEntityResource.status) {
+                viewModel.movieEmbedded.observe(this, movieEmbeddedResource -> {
+                    if (movieEmbeddedResource != null) {
+                        switch (movieEmbeddedResource.status) {
                             case LOADING:
                                 binding.progressBar.setVisibility(View.VISIBLE);
                                 break;
                             case SUCCESS:
-                                if (movieEntityResource.data != null) {
+                                if (movieEmbeddedResource.data != null) {
                                     binding.progressBar.setVisibility(View.GONE);
                                     binding.content.setVisibility(View.VISIBLE);
-                                    populateMovie(movieEntityResource.data.mMovies);
+                                    populateMovie(movieEmbeddedResource.data.mMovies);
                                 }
                                 break;
                             case ERROR:
@@ -89,16 +89,16 @@ public class DetailMovieActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_detail, menu);
         this.menu = menu;
 
-        viewModel.movieEmbedded.observe(this, movieEntityResource -> {
-            if (movieEntityResource != null) {
-                switch (movieEntityResource.status) {
+        viewModel.movieEmbedded.observe(this, movieEmbeddedResource -> {
+            if (movieEmbeddedResource != null) {
+                switch (movieEmbeddedResource.status) {
                     case LOADING:
                         binding.progressBar.setVisibility(View.VISIBLE);
                         break;
                     case SUCCESS:
-                        if (movieEntityResource.data != null) {
+                        if (movieEmbeddedResource.data != null) {
                             binding.progressBar.setVisibility(View.GONE);
-                            boolean state = movieEntityResource.data.mMovies.isLiked();
+                            boolean state = movieEmbeddedResource.data.mMovies.isLiked();
                             setLikeState(state);
                         }
                         break;
