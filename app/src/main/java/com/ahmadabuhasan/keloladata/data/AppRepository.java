@@ -215,4 +215,19 @@ public class AppRepository implements AppDataSource {
             }
         }.asLiveData();
     }
+
+    @Override
+    public LiveData<PagedList<TVShowEntity>> getLikedTVShows() {
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setInitialLoadSizeHint(3)
+                .setPageSize(3)
+                .build();
+        return new LivePagedListBuilder<>(localDataSource.getLikedTVShows(), config).build();
+    }
+
+    @Override
+    public void setTVShowLike(TVShowEntity tvShow, boolean state) {
+        appExecutors.diskIO().execute(() -> localDataSource.setTVShowLike(tvShow, state));
+    }
 }
