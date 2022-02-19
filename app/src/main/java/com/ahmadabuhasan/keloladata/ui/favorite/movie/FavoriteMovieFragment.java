@@ -49,9 +49,9 @@ public class FavoriteMovieFragment extends Fragment {
 
             adapter = new FavoriteMovieAdapter();
             binding.progressBar.setVisibility(View.VISIBLE);
-            viewModel.getLikes().observe(this, courses -> {
+            viewModel.getLikes().observe(this, movies -> {
                 binding.progressBar.setVisibility(View.GONE);
-                adapter.submitList(courses);
+                adapter.submitList(movies);
             });
 
             binding.rvFavoriteMovie.setLayoutManager(new LinearLayoutManager(getContext()));
