@@ -135,8 +135,10 @@ public class DetailTVShowActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.action_like);
         if (state) {
             menuItem.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite));
+            Toast.makeText(getApplicationContext(), "Add to Favorite", Toast.LENGTH_SHORT).show();
         } else {
             menuItem.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border));
+            Toast.makeText(getApplicationContext(), "Delete from Favorite", Toast.LENGTH_SHORT).show();
         }
     }
 }
