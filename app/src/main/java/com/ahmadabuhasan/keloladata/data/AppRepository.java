@@ -8,6 +8,7 @@ import androidx.paging.PagedList;
 import com.ahmadabuhasan.keloladata.data.source.local.LocalDataSource;
 import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEmbedded;
 import com.ahmadabuhasan.keloladata.data.source.local.entity.MovieEntity;
+import com.ahmadabuhasan.keloladata.data.source.local.entity.TVShowEmbedded;
 import com.ahmadabuhasan.keloladata.data.source.local.entity.TVShowEntity;
 import com.ahmadabuhasan.keloladata.data.source.remote.ApiResponse;
 import com.ahmadabuhasan.keloladata.data.source.remote.RemoteDataSource;
@@ -42,6 +43,7 @@ public class AppRepository implements AppDataSource {
         return INSTANCE;
     }
 
+    // Movie
     @Override
     public LiveData<Resource<PagedList<MovieEntity>>> getAllMovies() {
         return new NetworkBoundResource<PagedList<MovieEntity>, List<MovieResponse>>(appExecutors) {
@@ -135,6 +137,7 @@ public class AppRepository implements AppDataSource {
         appExecutors.diskIO().execute(() -> localDataSource.setMovieLike(movie, state));
     }
 
+    // TV Show
     @Override
     public LiveData<Resource<PagedList<TVShowEntity>>> getAllTVShows() {
         return new NetworkBoundResource<PagedList<TVShowEntity>, List<TVShowResponse>>(appExecutors) {
@@ -161,6 +164,43 @@ public class AppRepository implements AppDataSource {
             public void saveCallResult(List<TVShowResponse> tvShowResponses) {
                 ArrayList<TVShowEntity> tvShowList = new ArrayList<>();
                 for (TVShowResponse response : tvShowResponses) {
+                    TVShowEntity tvShow = new TVShowEntity(
+                            response.getTvShowId(),
+                            response.getOverview(),
+                            response.getPosterPath(),
+                            response.getFirstAirDate(),
+                            response.getTitle(),
+                            response.getVoteAverage(),
+                            false);
+                    tvShowList.add(tvShow);
+                }
+                localDataSource.insertTVShows(tvShowList);
+            }
+        }.asLiveData();
+    }
+
+    @Override
+    public LiveData<Resource<TVShowEmbedded>> getDetailTVShow(String tvShowId) {
+        return new NetworkBoundResource<TVShowEmbedded, List<TVShowResponse>>(appExecutors) {
+            @Override
+            protected LiveData<TVShowEmbedded> loadFromDB() {
+                return localDataSource.getTVShowsById(tvShowId);
+            }
+
+            @Override
+            protected Boolean shouldFetch(TVShowEmbedded embedded) {
+                return (embedded == null);
+            }
+
+            @Override
+            protected LiveData<ApiResponse<List<TVShowResponse>>> createCall() {
+                return remoteDataSource.getAllTVShows();
+            }
+
+            @Override
+            protected void saveCallResult(List<TVShowResponse> data) {
+                ArrayList<TVShowEntity> tvShowList = new ArrayList<>();
+                for (TVShowResponse response : data) {
                     TVShowEntity tvShow = new TVShowEntity(
                             response.getTvShowId(),
                             response.getOverview(),
