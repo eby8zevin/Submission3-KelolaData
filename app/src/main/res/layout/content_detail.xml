@@ -52,6 +52,7 @@
         android:numStars="10"
         android:progressBackgroundTint="#FFFF8800"
         android:progressTint="#FFFF8800"
+        android:rating="0"
         app:layout_constraintStart_toStartOf="@+id/tv_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
