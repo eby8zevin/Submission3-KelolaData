@@ -11,6 +11,7 @@ import com.ahmadabuhasan.keloladata.di.Injection;
 import com.ahmadabuhasan.keloladata.ui.detail.DetailMovieViewModel;
 import com.ahmadabuhasan.keloladata.ui.favorite.movie.FavoriteMovieViewModel;
 import com.ahmadabuhasan.keloladata.ui.movie.MovieViewModel;
+import com.ahmadabuhasan.keloladata.ui.tvshow.TVShowViewModel;
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
@@ -38,6 +39,8 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new DetailMovieViewModel(repository);
         } else if (modelClass.isAssignableFrom(FavoriteMovieViewModel.class)) {
             return (T) new FavoriteMovieViewModel(repository);
+        } else if (modelClass.isAssignableFrom(TVShowViewModel.class)) {
+            return (T) new TVShowViewModel(repository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
