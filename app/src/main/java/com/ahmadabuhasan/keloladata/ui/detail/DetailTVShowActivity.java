@@ -37,7 +37,7 @@ public class DetailTVShowActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         contentDetailBinding = binding.detailContent;
 
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         ViewModelFactory factory = ViewModelFactory.getInstance(this);
         viewModel = new ViewModelProvider(this, factory).get(DetailTVShowViewModel.class);
