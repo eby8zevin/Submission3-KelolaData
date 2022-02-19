@@ -3,13 +3,14 @@ package com.ahmadabuhasan.keloladata.ui.detail;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
+import androidx.lifecycle.ViewModel;
 
 import com.ahmadabuhasan.keloladata.data.AppRepository;
 import com.ahmadabuhasan.keloladata.data.source.local.entity.TVShowEmbedded;
 import com.ahmadabuhasan.keloladata.data.source.local.entity.TVShowEntity;
 import com.ahmadabuhasan.keloladata.vo.Resource;
 
-public class DetailTVShowViewModel {
+public class DetailTVShowViewModel extends ViewModel {
 
     private final MutableLiveData<String> tvShowId = new MutableLiveData<>();
     private AppRepository repository;
